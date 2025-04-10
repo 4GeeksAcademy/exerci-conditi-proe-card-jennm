@@ -30,17 +30,41 @@ function render(variables = {}) {
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
   // reset the website body with the new html output
+  let name = variables.name || "Nombre";
+  let lastName = variables.lastName || "Apellido";
+  let role = variables.role || "Ocupación";
+  let city = variables.city || "Ciudad";
+  let country = variables.country || "País";
+
+  // Validar redes sociales, construir los links si hay usuario
+  let twitter = variables.twitter
+    ? `<a href="https://twitter.com/${variables.twitter}"><i class="fab fa-twitter"></i></a>`
+    : "";
+  let github = variables.github
+    ? `<a href="https://github.com/${variables.github}"><i class="fab fa-github"></i></a>`
+    : "";
+  let linkedin = variables.linkedin
+    ? `<a href="https://linkedin.com/in/${variables.linkedin}"><i class="fab fa-linkedin"></i></a>`
+    : "";
+  let instagram = variables.instagram
+    ? `<a href="https://instagram.com/${variables.instagram}"><i class="fab fa-instagram"></i></a>`
+    : "";
+
+  // Posición de las redes sociales
+  let socialPosition = variables.socialMediaPosition || "position-right";
+
+  // Actualizar el contenido del widget
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
+          <h1>${name} ${lastName}</h1>
+          <h2>${role}</h2>
+          <h3>${city}, ${country}</h3>
+          <ul class="${socialPosition}">
+            <li>${twitter}</li>
+            <li>${github}</li>
+            <li>${linkedin}</li>
+            <li>${instagram}</li>
           </ul>
         </div>
     `;
